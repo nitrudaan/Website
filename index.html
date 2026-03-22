@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#0B0C10" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <!-- Security headers -->
+    <meta http-equiv="X-Content-Type-Options" content="nosniff" />
+    <meta http-equiv="X-Frame-Options" content="DENY" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' 'unsafe-eval' cdn.tailwindcss.com; style-src 'self' 'unsafe-inline' fonts.googleapis.com cdn.tailwindcss.com; font-src 'self' fonts.gstatic.com; img-src 'self' data: https:; connect-src 'self' https://*.supabase.co wss://*.supabase.co https://script.google.com https://*.googleusercontent.com; media-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self';" />
+    <title>Udaan | NIT Rourkela</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@300;400;500;600;700&family=Share+Tech+Mono&family=Michroma&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            fontFamily: {
+              display: ['"Michroma"', 'sans-serif'],
+              body: ['"Inter"', 'sans-serif'],
+              mono: ['"JetBrains Mono"', 'monospace'],
+            },
+            colors: {
+              nation: {
+                black: '#0B0C10', 
+                void: '#050608',
+                panel: '#15161A',
+                accent: '#D4AF37', // Metallic Bronze (Secondary/Gold)
+                secondary: '#3B82F6', // Precision Blue (Primary Accent)
+                text: '#9CA3AF', // Cool Grey
+                light: '#F3F4F6',
+              }
+            },
+            backgroundImage: {
+              'void-gradient': "radial-gradient(circle at center, #1F2937 0%, #0B0C10 100%)",
+            },
+            animation: {
+              'spin-slow': 'spin 20s linear infinite',
+              'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+              'fade-in': 'fadeIn 0.5s ease-out forwards',
+              'scan': 'scanline 8s linear infinite',
+              'glitch': 'glitch 0.2s linear infinite',
+              'blink': 'blink 1s step-end infinite',
+            },
+            keyframes: {
+              fadeIn: {
+                '0%': { opacity: '0' },
+                '100%': { opacity: '1' },
+              },
+              scanline: {
+                '0%': { top: '-100%' },
+                '100%': { top: '200%' },
+              },
+              glitch: {
+                '0%': { transform: 'translate(0)' },
+                '20%': { transform: 'translate(-2px, 2px)' },
+                '40%': { transform: 'translate(-2px, -2px)' },
+                '60%': { transform: 'translate(2px, 2px)' },
+                '80%': { transform: 'translate(2px, -2px)' },
+                '100%': { transform: 'translate(0)' },
+              },
+              blink: {
+                '0%, 100%': { opacity: '1' },
+                '50%': { opacity: '0' },
+              }
+            }
+          }
+        }
+      }
+    </script>
+    <style>
+      html {
+        background-color: #0B0C10;
+      }
+      body {
+        background-color: #0B0C10;
+        color: #F3F4F6;
+        font-family: "Inter", sans-serif;
+        margin: 0;
+        /* Reverting overflow-x to auto to prevent scroll locking issues if JS fails to clean up */
+        overflow-x: hidden; 
+      }
+
+      ::selection {
+        background: rgba(59, 130, 246, 0.3); /* Blue selection */
+        color: white;
+      }
+
+      /* Updated glow to be more subtle as requested */
+      .text-glow { text-shadow: 0 0 8px rgba(59, 130, 246, 0.4); }
+      
+      /* Glass effect classes */
+      .glass {
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+      }
+      
+      .glass-dark {
+        background: rgba(0, 0, 0, 0.4);
+        backdrop-filter: blur(16px);
+        -webkit-backdrop-filter: blur(16px);
+        border: 1px solid rgba(255, 255, 255, 0.08);
+      }
+      
+      .glass-blue {
+        background: rgba(59, 130, 246, 0.1);
+        backdrop-filter: blur(12px);
+        -webkit-backdrop-filter: blur(12px);
+        border: 1px solid rgba(59, 130, 246, 0.2);
+      }
+      
+      /* Hover glow effect for cards */
+      .hover-glow {
+        transition: all 0.3s ease;
+      }
+      .hover-glow:hover {
+        box-shadow: 0 0 30px rgba(59, 130, 246, 0.15), 0 0 60px rgba(59, 130, 246, 0.1);
+      }
+      
+      .clip-path-slant { clip-path: polygon(15px 0, 100% 0, 100% calc(100% - 15px), calc(100% - 15px) 100%, 0 100%, 0 15px); }
+      .scrollbar-hide::-webkit-scrollbar { display: none; }
+      .logo-filter { filter: brightness(0) invert(1) sepia(0) saturate(0) opacity(0.8); }
+
+      /* LENIS RECCOMENDED STYLES */
+      html.lenis, html.lenis body {
+        height: auto;
+      }
+      .lenis.lenis-smooth {
+        scroll-behavior: auto !important;
+      }
+      .lenis.lenis-smooth [data-lenis-prevent] {
+        overscroll-behavior: contain;
+      }
+      .lenis.lenis-stopped {
+        overflow: hidden;
+      }
+      .lenis.lenis-scrolling iframe {
+        pointer-events: none;
+      }
+    </style>
+  <script type="importmap">
+{
+  "imports": {
+    "react": "https://esm.sh/react@18.2.0",
+    "react-dom/client": "https://esm.sh/react-dom@18.2.0/client",
+    "react-dom/": "https://esm.sh/react-dom@18.2.0/",
+    "react/": "https://esm.sh/react@18.2.0/",
+    "@react-three/fiber": "https://esm.sh/@react-three/fiber@8.15.16?external=react,react-dom,three",
+    "@react-three/drei": "https://esm.sh/@react-three/drei@9.99.0?external=react,react-dom,three,@react-three/fiber",
+    "three": "https://esm.sh/three@0.160.0",
+    "framer-motion": "https://esm.sh/framer-motion@10.18.0?external=react,react-dom",
+    "lucide-react": "https://esm.sh/lucide-react@0.344.0?external=react,react-dom",
+    "lenis": "https://esm.sh/lenis@1.1.5"
+  }
+}
+</script>
+</head>
+  <body>
+    <div id="root"></div>
+    <script type="module" src="./index.tsx"></script>
+    <!-- Security: Disable right-click and common dev tools shortcuts in production -->
+    <script>
+      (function() {
+        // Only apply in production (when not on localhost)
+        if (location.hostname === 'localhost' || location.hostname === '127.0.0.1') return;
+        
+        // Disable right-click context menu
+        document.addEventListener('contextmenu', function(e) { e.preventDefault(); });
+        
+        // Disable common keyboard shortcuts for dev tools
+        document.addEventListener('keydown', function(e) {
+          // F12
+          if (e.key === 'F12') { e.preventDefault(); return false; }
+          // Ctrl+Shift+I (Dev Tools)
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'I') { e.preventDefault(); return false; }
+          // Ctrl+Shift+J (Console)
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'J') { e.preventDefault(); return false; }
+          // Ctrl+U (View Source)
+          if ((e.ctrlKey || e.metaKey) && e.key === 'u') { e.preventDefault(); return false; }
+          // Ctrl+Shift+C (Inspect Element)
+          if ((e.ctrlKey || e.metaKey) && e.shiftKey && e.key === 'C') { e.preventDefault(); return false; }
+        });
+        
+        // Disable text selection on sensitive elements
+        document.addEventListener('selectstart', function(e) {
+          if (e.target.closest('.no-select')) { e.preventDefault(); }
+        });
+        
+        // Clear console periodically to deter snooping
+        setInterval(function() { console.clear(); }, 1000);
+        
+        // Detect dev tools via debugger timing (basic detection)
+        (function detectDevTools() {
+          var devtools = { open: false };
+          setInterval(function() {
+            var start = performance.now();
+            debugger;
+            var diff = performance.now() - start;
+            devtools.open = diff > 100;
+            if (devtools.open) {
+              document.body.innerHTML = '<div style="display:flex;align-items:center;justify-content:center;height:100vh;background:#0B0C10;color:white;font-family:sans-serif;"><div style="text-align:center;"><h1>🔒 Access Restricted</h1><p>Developer tools are not allowed on this page.</p></div></div>';
+            }
+          }, 500);
+        })();
+      })();
+    </script>
+  </body>
+</html>

@@ -1,0 +1,49 @@
+diff --git a/pages/TeamLogin.tsx b/pages/TeamLogin.tsx
+index 06848a0..c0f47dc 100644
+--- a/pages/TeamLogin.tsx
++++ b/pages/TeamLogin.tsx
+@@ -218,7 +218,7 @@ const Sidebar = ({ member, activeTab, setActiveTab, onLogout, unreadCount, pendi
+     const is4thYear = member.year === 4;
+     const superAdmin = isSuperAdmin(member.member_id);
+     const isAlumni = member.role === 'Alumni' || member.year === 0;
+-    const isProvisional = sessionStorage.getItem('udaanIsProvisional') === 'true';
++    const isProvisional = member.status === 'provisional';
+     const canAssignTasks = (isCouncil || is4thYear) && !isAlumni;
+ 
+     // Check if current member is a division head
+@@ -7528,7 +7528,7 @@ const JoinCorpsApplicationsTab = ({ currentMember }: { currentMember: Member })
+ };
+ 
+ const MemberDashboard = ({ member, onLogout }: { member: Member; onLogout: () => void }) => {
+-    const isProvisional = sessionStorage.getItem('udaanIsProvisional') === 'true';
++    const isProvisional = member.status === 'provisional';
+     const [activeTab, setActiveTab] = useState(isProvisional ? 'whatsapp-group' : 'dashboard');
+     const [announcements, setAnnouncements] = useState<Announcement[]>([]);
+     const [tasks, setTasks] = useState<Task[]>([]);
+@@ -7913,7 +7913,7 @@ const MemberDashboard = ({ member, onLogout }: { member: Member; onLogout: () =>
+                 return <div className="flex items-center justify-center h-64 text-white/50">Access Restricted</div>;
+             case 'dashboard':
+                 // Show simple welcome message for provisional (induction) members
+-                if (sessionStorage.getItem('udaanIsProvisional') === 'true') {
++                if (member.status === 'provisional') {
+                     return (
+                         <div className="flex items-center justify-center min-h-[60vh]">
+                             <div className="text-center">
+@@ -8612,7 +8612,7 @@ const MemberDashboard = ({ member, onLogout }: { member: Member; onLogout: () =>
+                         const is4thYear = member.year === 4;
+                         const superAdmin = isSuperAdmin(member.member_id);
+                         const isAlumni = member.role === 'Alumni' || member.year === 0;
+-                        const isProvisionalMember = sessionStorage.getItem('udaanIsProvisional') === 'true';
++                        const isProvisionalMember = member.status === 'provisional';
+                         const canAssignTasks = (isCouncil || is4thYear) && !isAlumni;
+                         const isDivisionHead = Object.values(DIVISION_HEADS).some(h => h.member_id === member.member_id);
+ 
+@@ -8793,7 +8793,7 @@ const TeamLoginPage: React.FC = () => {
+     };
+ 
+     const handleLogout = () => {
+-        const isProvisional = sessionStorage.getItem('udaanIsProvisional') === 'true';
++        const isProvisional = loggedInMember?.status === 'provisional' || sessionStorage.getItem('udaanIsProvisional') === 'true';
+ 
+         sessionStorage.removeItem('udaanMemberId');
+         sessionStorage.removeItem('udaanMemberData');

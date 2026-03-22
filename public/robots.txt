@@ -1,0 +1,18 @@
+# Robots.txt for Udaan NIT Rourkela
+# Prevent indexing of sensitive pages
+
+User-agent: *
+Allow: /
+
+# Block sensitive/admin pages from being indexed
+Disallow: /team-login
+Disallow: /induction-login
+Disallow: /admin
+Disallow: /api/
+Disallow: /*.json$
+
+# Block config files
+Disallow: /config.json
+
+# Sitemap (if exists)
+# Sitemap: https://yourdomain.com/sitemap.xml
